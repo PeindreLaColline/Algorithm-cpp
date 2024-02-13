@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include <cmath>
 using namespace std;
 
 #define MAX 3000;
@@ -16,7 +15,6 @@ vector<pair<int, int>> chicken;
 int house_size = 0;
 
 vector<vector<int>> dist; //distance
-//vector<vector<pair<int, int>>> closest; //house -> chicken sort by distance (chicken index)
 
 int ans = MAX;
 
@@ -68,39 +66,22 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			cin >> tmp;
-			if (tmp == 0) {
-				continue;
-			}
-			else if (tmp == 1) {
-				house.push_back({ j, i });
-			}
-			else if (tmp == 2) {
-				chicken.push_back({ j, i });
-			}
+			if (tmp == 0) {continue;}
+			else if (tmp == 1) {house.push_back({ j, i });}
+			else if (tmp == 2) {chicken.push_back({ j, i });}
 		}
 	}
 	house_size = house.size();
 
 	//get distance for all
 	dist.resize(house_size);
-	//closest.resize(house_size);
 
 	for (int i = 0; i < house_size; i++) {
 		for (int j = 0; j < chicken.size(); j++) {
 			tmp = get_distance(house[i].first, chicken[j].first, house[i].second, chicken[j].second);
 			dist[i].push_back(tmp);
-			//closest[i].push_back({ tmp, j });
 		}
 	}
-
-	/*
-	//sort
-	for (int i = 0; i < house.size(); i++) {
-		sort(closest[i].begin(), closest.end(), [](const auto& a, const autp b) {
-			return a.first < b.first;
-		}
-	}
-	*/
 
 	//backtracking
 	stack<int> visited;
