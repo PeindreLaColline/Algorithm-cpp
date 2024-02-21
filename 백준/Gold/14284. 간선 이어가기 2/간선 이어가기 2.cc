@@ -1,3 +1,8 @@
+/*
+백준 14284
+골드5
+다익스트라
+*/
 #include <iostream>
 #include <vector>
 #include <queue>
