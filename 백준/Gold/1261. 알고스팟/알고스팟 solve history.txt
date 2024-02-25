@@ -1,0 +1,20 @@
+1. 알고스팟1
+  Tried to solve it for 4 days and I failed
+
+2. 알고스팟2
+  So I found a solution from the link down below
+    https://chanhuiseok.github.io/posts/baek-17/
+  And it did work but I don't see that big difference compare to mine (알고스팟1)
+
+3. 알고스팟3
+  So I tried again to find and solve the problem from 알고스팟1
+  Found the reason from the link down below
+    https://discuss.codechef.com/t/comparators-in-priority-queue-in-cpp/94291/2
+  The problem was that I didn't declare proper operator for prioirity_queue
+  It was not about my logic
+  So I modified the operator function, and kept my original logic(알고스팟1)
+  It worked
+
+In short,
+logic was fine at the first place but the grammer was bad
+  
