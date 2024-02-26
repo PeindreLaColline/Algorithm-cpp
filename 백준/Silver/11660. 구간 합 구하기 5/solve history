@@ -1,0 +1,28 @@
+ver1 is from 
+https://chanhuiseok.github.io/posts/baek-19/
+
+ver2 is mine (2024.02.26)
+
+mainly, logic was correct but method was slow
+for example, push_back in vector or cout<<endl;
+
+To solve,
+1. push_back 
+  -> initialize the board instead of add the value everytime
+  -> it's because push_back causes resizing and it takes long time
+
+2. cout<<endl;
+  -> take long time
+  -> better to use '\n'
+  -> anyway it's same
+
+3. add these codes
+  -> ios::sync_with_stdio(0);
+	-> cin.tie(0);
+ -> it's about a relationship between cin and printf
+ -> if only one method is used, try to add those codes
+ -> it will make it faster
+
+In brief,
+It was all about the way getting the input and print
+not about algorithm
