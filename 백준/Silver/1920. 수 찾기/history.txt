@@ -1,0 +1,16 @@
+first version of code 
+: wrong_version.cc
+
+second version of code
+: 수 찾기.cc
+
+changed
+1. used recursive function in the first one
+  but chaned to use while 
+2. add 
+  ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+  so that code can be faster
+in conclusion, main point was first change
+i suppose that there was a problem in my first code but I couldn't figure it out yet (2024-04-23)
