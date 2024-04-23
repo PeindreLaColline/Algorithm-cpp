@@ -40,7 +40,7 @@ int main() {
 			continue;
 		}
 		else if (target == arr[n - 1] || arr[0] == target) {
-			cout << 1 << "\n";
+			cout << 1 << '\n';
 			continue;
 		}
 		cout << binary(0, n - 1) << '\n';
