@@ -12,17 +12,13 @@ void binary(int s, int e) {
 		f = mid - 1;
 		b = mid + 1;
 		if (v[mid] == tmp) return;
-		if (f >= 0) {
-			if (v[f] < tmp && tmp < v[mid]) {
-				v[mid] = tmp;
-				return;
-			}
+		if (v[f] < tmp && tmp < v[mid]) {
+			v[mid] = tmp;
+			return;
 		}
-		if (b <= v.size() - 1) {
-			if (v[mid] < tmp && tmp < v[b]) {
-				v[b] = tmp;
-				return;
-			}
+		if (v[mid] < tmp && tmp < v[b]) {
+			v[b] = tmp;
+			return;
 		}
 		if (v[mid] > tmp) e = mid - 1;
 		else if (v[mid] < tmp) s = mid + 1;
