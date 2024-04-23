@@ -6,18 +6,6 @@ using namespace std;
 vector<int> a;
 vector<int> b;
 
-void compare() {
-	
-}
-
-void a_bigger() {
-	
-}
-
-void b_bigger() {
-
-}
-
 int main() {
 	int n, m;
 	int test;
@@ -37,13 +25,32 @@ int main() {
 		sort(a.begin(), a.end());
 		sort(b.begin(), b.end());
 
+		int j = 0;
 		int ans = 0;
+		int pa = 0;
+		int pre = 0;
 		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				if (a[i] > b[j]) ans++;
-				else break;
+			if (pa == a[i]) {
+				ans += pre;
+				continue;
+			}
+			while (true) {
+				if (j >= m) {
+					ans += pre;
+					break;
+				}
+				if (a[i] > b[j]) {
+					pre++;
+					j++;
+				}
+				else if (a[i] <= b[j]) {
+					ans += pre;
+					pa = a[i];
+					break;
+				}
 			}
 		}
-		cout << ans << endl;
+		cout << ans<<endl;
 	}
+
 }
