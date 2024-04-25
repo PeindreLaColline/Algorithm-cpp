@@ -39,23 +39,16 @@ void bfs() {
 				if (fuel[ny][nx] > fuel[cy][cx]) {
 					visited[ny][nx] = false;
 					fuel[ny][nx] = fuel[cy][cx];
-
 					if (map[ny][nx] == 2) break;
 					q.push({ nx, ny });
 				}
 			}
 			else{
 				if (fuel[ny][nx] > fuel[cy][cx] + 1) {
+					fuel[ny][nx] = fuel[cy][cx] + 1;
 					visited[ny][nx] = false;
-					if (map[ny][nx] == 2) {
-						fuel[ny][nx] = fuel[cy][cx] + 1;
-						//q.push({ nx, ny });
-						break;
-					}
-					else if (map[ny][nx] != 2) {
-						fuel[ny][nx] = fuel[cy][cx] + 1;
-						q.push({ nx, ny });
-					}
+					if (map[ny][nx] == 2) break;
+					else if (map[ny][nx] != 2) q.push({ nx, ny });
 				}
 			}
 		}
