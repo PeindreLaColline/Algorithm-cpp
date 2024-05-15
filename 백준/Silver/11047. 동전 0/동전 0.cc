@@ -2,43 +2,32 @@
 #include <vector>
 using namespace std;
 
-int n, k;
 vector<int> coin;
+int n, k;
+int ans;
 
-int ans = 98765432;
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-void greedy(int curs, int cn, int idx) {
-	if (cn > ans) return;
-	if (curs == 0) {
-		if (cn < ans) ans = cn;
-		return;
-	}
-	if (idx == -1) return;
-
-	int i = 1;
-	while (true) {
-		if (curs - coin[idx] * i >= 0) {
-			i++;
-			continue;
-		}
-		else {
-			break;
-		}
-	}
-	greedy(curs - coin[idx] * (i - 1), cn + i - 1, idx - 1);
-}
-
-int main() {	
 	cin >> n >> k;
-	
-	int a;
-	for (int i = 0; i < n; i++) {
-		cin >> a;
-		if (a > k) continue;
-		coin.push_back(a);
-	}
-	n = coin.size();
+	ans = k + 1;
 
-	greedy(k, 0, n-1);
+	int tmp;
+	for (int i = 0; i < n; i++) {
+		cin >> tmp;
+		if (tmp > k) continue;
+		else coin.push_back(tmp);
+	}
+
+	ans = 0;
+	n = coin.size() - 1;
+	for (int i = n; i >= 0; i--) {
+		ans += k / coin[i];
+		k %= coin[i];
+		if (k <= 0) break;
+	}
+
 	cout << ans;
 }
