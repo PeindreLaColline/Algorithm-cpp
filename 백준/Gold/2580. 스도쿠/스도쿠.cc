@@ -26,11 +26,14 @@ bool avail(int col, int row, int num) {
 
 void sudoku(int col, int row) {
 	if (done) return;
+
+	//go to y+1, if it's the end of current x
 	if (col == 9) {
 		sudoku(0, row + 1);
 		return;
 	}
 
+	//print sudoku if it's row 9, which means we reached to the end of y, the end of x
 	if (row == 9) {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -42,6 +45,7 @@ void sudoku(int col, int row) {
 		return;
 	}
 
+	//if it's 0, find available number, and put it in, and move to x+1
 	if (map[row][col] == 0) {
 		for (int i = 1; i <= 9; i++) {
 			if (avail(col, row, i)) {
