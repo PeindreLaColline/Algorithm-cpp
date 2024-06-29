@@ -53,11 +53,13 @@ void bfs() {
 				nx = cx + dir[i][0];
 				ny = cy + dir[i][1];
 				
-				if (!visited[ny][nx] && 0 <= nx && nx > n && 0 <= ny && ny > n) {
-					dif = map[ny][nx] - cpop;
-					if (l <= dif && dif <= r) {
-						ntogo.push({ nx, ny });
-						visited[ny][nx] = true;
+				if ( 0 <= nx && nx > n && 0 <= ny && ny > n) {
+					if (!visited[ny][nx]) {
+						dif = map[ny][nx] - cpop;
+						if (l <= dif && dif <= r) {
+							ntogo.push({ nx, ny });
+							visited[ny][nx] = true;
+						}
 					}
 				}
 			}
