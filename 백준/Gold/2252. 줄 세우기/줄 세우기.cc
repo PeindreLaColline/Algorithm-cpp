@@ -1,58 +1,45 @@
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
 using namespace std;
 
-int N, M;
-vector<vector<int>> g;
+int n, m;
 vector<int> indegree;
+vector<vector<int>> node;
 
 void bfs() {
-    queue<int> q;
+	queue<int> q;
+	for (int i = 1; i <= n; i++) {
+		if (indegree[i] == 0) q.push(i);
+	}
 
-    // Initialize the queue with nodes having zero indegree
-    for (int i = 1; i <= N; ++i) {
-        if (indegree[i] == 0) {
-            q.push(i);
-        }
-    }
-
-    // Process nodes in topological order
-    while (!q.empty()) {
-        int current = q.front();  // Get the front of the queue
-        q.pop();  // Remove the front element from the queue
-
-        // Print or process the current node
-        cout << current << " ";
-
-        // Traverse through the neighbors of the current node
-        for (int j = 0; j < g[current].size(); ++j) {
-            int neighbor = g[current][j];
-
-            // Decrease the indegree of the neighbor
-            if (--indegree[neighbor] == 0) {
-                q.push(neighbor);  // If indegree becomes zero, add to the queue
-            }
-        }
-    }
+	int num, tmp;
+	while (!q.empty()) {
+		num = q.front();
+		q.pop();
+		cout << num<<" ";
+		for (int i = 0; i < node[num].size(); i++) {
+			tmp = node[num][i];
+			if (--indegree[tmp] == 0) q.push(tmp);
+		}
+	}
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-    cin >> N >> M;
-    g.resize(N + 1);
-    indegree.resize(N + 1, 0);
+	cin >> n >> m;
+	node.resize(n + 1);
+	indegree.resize(n + 1, 0);
 
-    int a, b;
-    for (int i = 0; i < M; ++i) {
-        cin >> a >> b;
-        g[a].push_back(b);
-        indegree[b]++;
-    }
+	int a, b;
+	for (int i = 0; i < m; i++) {
+		cin >> a >> b;
+		node[a].push_back(b);
+		indegree[b]++;
+	}
 
-    bfs();
-
-    return 0;
+	bfs();
 }
