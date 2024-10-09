@@ -11,12 +11,6 @@ bool comparator(const int &a, const int &b){
     return a>b;
 }
 
-void rope(int s, int mini, int cnt){
-    for(int i =s+1; i<n; i++){
-        
-    }
-}
-
 int main(){
     cin>>n;
     num.resize(n);
@@ -28,9 +22,7 @@ int main(){
     ans = num[0];
 
     for(int i =1; i<n; i++){
-        if(ans <= num[i]*(i+1)){
-            ans = num[i]*(i+1);
-        }
+        if(ans <= num[i]*(i+1)) ans = num[i]*(i+1);
     }
 
     cout<<ans;
