@@ -7,32 +7,23 @@ using namespace std;
 int n;
 vector<string> v;
 
-bool compare(string a, string b) {
-	if (a.size() != b.size()) {
-		return a.size() < b.size();
-	}
-	else {
-		return a < b;
-	}
+bool compare(const string &a, const string &b){
+    if (a.length() == b.length()) return a<b;
+    else return a.length() < b.length();
 }
 
-int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
+int main(){
+    cin>>n;
+    v.resize(n);
 
-	cin >> n;
-	v.resize(n);
-	string s;
-	for (int i = 0;i < n; i++) {
-		cin >> s;
-		v[i] = s;
-	}
-	sort(v.begin(), v.end(), compare);
+    for(int i =0; i<n; i++){
+        cin>>v[i];
+    }
 
-	cout << v[0] << endl;
-	for (int i = 1; i < n; i++) {
-		if (v[i] == v[i - 1]) continue;
-		cout << v[i] << endl;
-	}
+    sort(v.begin(), v.end(), compare);
+    v.erase(unique(v.begin(), v.end()), v.end());
+
+    for(int i =0; i<v.size(); i++){
+        cout<<v[i]<<endl;
+    }
 }
