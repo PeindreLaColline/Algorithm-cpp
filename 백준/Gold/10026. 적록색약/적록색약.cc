@@ -1,96 +1,82 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <string>
 using namespace std;
 
-vector<char> ctmp(102, 'X');
-vector<vector<char>> arr(102, ctmp);
+int dir[4][4] = { {0,-1},{1,0}, {0,1}, {-1,0} };
 
-vector<bool> btmp(102, false);
-vector<vector<bool>> visited(102, btmp);
+int n;
+vector<vector<int>> map;
+vector<vector<bool>> visited;
 
-vector<pair<int, int>> dir(4);
+queue<pair<int, int>> togo;
 
-void non_blind(int col, int row) {
-	if (visited[col][row] == true) return;
-	if (arr[col][row] == 'X') return;
+int yes, no;
 
-	visited[col][row] = true;
-	char color = arr[col][row];
+void bfs(int tar) {
+	int cx, cy, nx, ny;
+	while (!togo.empty()) {
+		cx = togo.front().first;
+		cy = togo.front().second;
+		togo.pop();
 
-	for (int i = 0; i < 4; i++) {
-		if (visited[col + dir[i].second][row + dir[i].first] == false) {
-			if (arr[col + dir[i].second][row + dir[i].first] == color) {
-				non_blind(col + dir[i].second, row + dir[i].first);
-			}
-		}
-	}
-}
-
-void blind(int col, int row) {
-	if (visited[col][row] == true) return;
-	if (arr[col][row] == 'X') return;
-
-	visited[col][row] = true;
-	char color = arr[col][row];
-
-	for (int i = 0; i < 4; i++) {
-		char ccolor = arr[col + dir[i].second][row + dir[i].first];
-		if (visited[col + dir[i].second][row + dir[i].first] == false) {
-			if (color == 'R' || color == 'G') {
-				if (ccolor == 'R' || ccolor == 'G') {
-					blind(col + dir[i].second, row + dir[i].first);
-				}
-			}
-			else if (color == 'B') {
-				if (ccolor == 'B') {
-					blind(col + dir[i].second, row + dir[i].first);
-				}
+		for (int i = 0; i< 4; i++) {
+			nx = cx + dir[i][0];
+			ny = cy + dir[i][1];
+			if (nx >= 0 && nx < n && ny >= 0 && ny < n && !visited[ny][nx] && map[ny][nx] == tar) {
+				visited[ny][nx] = true;
+				togo.push({ nx, ny });
 			}
 		}
 	}
 }
 
 int main() {
-	int n;
 	cin >> n;
+	vector<int> itmp(n);
+	vector<bool> btmp(n, false);
 
-	string s;
-	for (int i = 1; i <= n; i++) {
-		cin >> s;
-		for (int j = 1; j <= n; j++) {
-			arr[i][j]= s[j - 1];
+	string tmp;
+	for (int i = 0; i < n; i++) {
+		cin >> tmp;
+		map.push_back(itmp);
+		visited.push_back(btmp);
+		for (int j = 0; j < n; j++) {
+			map[i][j] = tmp[j];
 		}
 	}
 
-	dir[0] = { 1, 0 };
-	dir[1] = { 0, 1 };
-	dir[2] = { -1, 0 };
-	dir[3] = { 0, -1 };
-
-	int nonblind_block = 0;
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			if (visited[i][j] == false) {
-				non_blind(i, j);
-				nonblind_block++;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (!visited[i][j]) {
+				yes++;
+				togo.push({ j, i });
+				bfs(map[i][j]);
 			}
 		}
 	}
 
-	for (int i = 0; i <= n; i++) {
-		visited[i] = btmp;
+	visited.clear();
+	for (int i = 0; i < n; i++) {
+		visited.push_back(btmp);
 	}
 
-	int blind_block = 0;
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			if (visited[i][j] == false) {
-				blind(i, j);
-				blind_block++;
-			}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (map[i][j] == 71) map[i][j] = 82;
 		}
 	}
 
-	cout << nonblind_block << " " << blind_block;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (!visited[i][j]) {
+				no++;
+				togo.push({ j, i });
+				bfs(map[i][j]);
+			}
+		}
+	}
+	cout << yes << " " << no << endl;
+
 }
