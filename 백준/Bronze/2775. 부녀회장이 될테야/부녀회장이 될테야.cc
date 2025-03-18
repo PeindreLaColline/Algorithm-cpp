@@ -1,6 +1,7 @@
 /*16:28*/
 /*
 v[a][b] = v[a-1][1] ~ v[a-1][b]의 합
+dp로 각 호실의 사람들 더해나가면 됨
 */
 #include <iostream>
 #include <vector>
