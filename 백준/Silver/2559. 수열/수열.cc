@@ -1,4 +1,7 @@
 /*01:43*/
+/*
+슬라이딩 윈도우
+    */
 #include <iostream>
 #include <vector>
 #include <math.h>
