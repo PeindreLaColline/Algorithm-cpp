@@ -1,4 +1,9 @@
 /*19:24*/
+/*
+배열에 연결 정보 저장 (1-2가 연결되어있다면 map[1]에 2넣고, map[2]에 1 넣어서 양방향으로 저장)
+visited 배열 확인하면서 dfs 순회
+dfs 함수 호출 횟수가 연결 요소 개수
+*/
 #include <iostream>
 #include <vector>
 #include <queue>
