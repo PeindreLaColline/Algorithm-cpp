@@ -1,59 +1,56 @@
+/*19:24*/
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <math.h>
 using namespace std;
 
 int n, m;
-vector<vector<bool>> map;
 vector<bool> visited;
-queue<int> togo;
+vector<vector<int> > map;
 
-int get_ind() {
-	for (int i = 1; i <= n; i++) {
-		if (visited[i] == false) return i;
-	}
-	return -1;
+void dfs(int po){
+    queue<int> togo;
+    togo.push(po);
+
+    while(!togo.empty()){
+        int cur = togo.front();
+        togo.pop();
+        
+        for(int i =0; i<map[cur].size(); i++){
+            if(visited[map[cur][i]]) continue;
+            visited[map[cur][i]] = true;
+            togo.push(map[cur][i]);
+        }
+    }
 }
 
-void bfs() {
-	while (!togo.empty()) {
-		int cp = togo.front();
-		togo.pop();
-		for (int i = 1; i <= n; i++) {
-			if (visited[i] == false && map[cp][i] == true && cp!=i) {
-				visited[i] = true;
-				togo.push(i);
-			}
-		}
-	}
-}
+int main(){
+    // init
+    cin >> n >> m;
+    visited.resize(n, false);
+    map.resize(n);
 
-int main() {
-	cin >> n >> m;
-	vector<bool> btmp(n+1);
-	visited.resize(n+1, false);
-	for (int i = 0; i <= n; i++) {
-		map.push_back(btmp);
-	}
-	int a, b;
-	for (int i = 0; i < m; i++) {
-		cin >> a >> b;
-		map[a][b] = true;
-		map[b][a] = true;
-	}
+    // input
+    int a, b;
+    for(int i =0; i<m; i++){
+        cin >> a >> b;
+        a--;
+        b--;
+        map[a].push_back(b);
+        map[b].push_back(a);
+    }
 
-	int ans = 0;
-	while (true) {
-		int cp = get_ind();
-		if (cp == -1) {
-			break;
-		}
-		else {
-			togo.push(cp);
-			visited[cp] = true;
-			bfs();
-			ans++;
-		}
-	}
-	cout << ans;
+    // dfs
+    int ans = 0;
+    for(int i =0; i<n; i++){
+        if(!visited[i]){
+            ans++;
+            visited[i] = true;
+            dfs(i);
+        }
+    }
+
+    // output
+    cout << ans;
 }
