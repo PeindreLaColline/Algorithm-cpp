@@ -1,4 +1,7 @@
 /*18:58*/
+/*
+dfs로 붙어있는 배추가 몇 덩어리인지 카운트
+*/
 #include <iostream>
 #include <vector>
 #include <queue>
