@@ -1,39 +1,41 @@
-/*15:12*/
 #include <iostream>
 #include <vector>
 #include <math.h>
 using namespace std;
 
-int n;
-vector<long long> v;
-
 int main(){
+    int n;
     cin >> n;
-    v.resize(n);
+    vector<int> v(n);
     for(int i =0; i<n; i++){
         cin >> v[i];
     }
 
-    long long ans = 9876543210;
-    int a, b;
-    int p1 = 0;
-    int p2 = n-1;
-    while(p1<p2){
-        if(abs(ans) > abs(v[p1] + v[p2])){
-            a = v[p1];
-            b = v[p2];
-            ans = v[p1] + v[p2];
+    int a = 0;
+    int b = n-1;
+    int s1, s2;
+    int ans = 2e9;
+    
+    while(a < b){
+        int cur = v[a]+v[b];
+        if(ans > abs(cur)){
+            ans = abs(cur);
+            s1=v[a];
+            s2=v[b];   
         }
-        if(v[p1] + v[p2]<0){
-            p1++;
+
+        if(cur>0){
+            b--;
         }
-        else if(v[p1] + v[p2] > 0){
-            p2--;
+        else if(cur<0){
+            a++;
         }
-        else{
+        else if(cur == 0){
+            s1 = v[a];
+            s2 = v[b];
             break;
         }
     }
 
-    cout << a << " " << b;
+    cout << s1 << " "<< s2;
 }
