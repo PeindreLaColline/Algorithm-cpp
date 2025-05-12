@@ -1,4 +1,5 @@
 /*16:36*/
+//bfs로 순회하면서 만날 수 있는 P 카운트
 #include <iostream>
 #include <vector>
 #include <string>
