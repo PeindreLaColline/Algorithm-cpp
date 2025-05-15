@@ -1,4 +1,7 @@
 /*14:56*/
+/*처음엔 이분탐색 썼는데 그러면 건너뛰는 숫자가 생겨서 안 됨
+    그래서 제일 작은 수부터 제일 큰 수까지 브루트포스함
+    */
 #include <iostream>
 #include <vector>
 #include <queue>
