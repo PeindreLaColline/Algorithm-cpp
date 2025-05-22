@@ -3,12 +3,10 @@
     case 1 (n==1)
     OOIOIOIOIIOII
     0012345671231
-    (7-n)/2 + (3-n)/2 = 3 + 1 = 4
 
     case 2 (n==2)
     OOIOIOIOIIOII
     0012345671231
-    (7-n)/2 + (3-n)/2 = 2 + 0 = 2
     */
 #include <iostream>
 #include <vector>
