@@ -10,4 +10,6 @@ int main(){
     }
     sort(num.begin(), num.end());
     cout<<num[1];
+
+    return 0;
 }
