@@ -1,40 +1,40 @@
+//16:43
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-vector<pair<int, int>> v;
 int n;
-int ans = 1;
+int a, b;
+vector<pair<int, int> > v;
 
-int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
 
-	cin >> n;
-	v.resize(n);
-	for (int i = 0; i < n; i++) {
-		cin >> v[i].first >> v[i].second; //시작, 끝남
-	}
+bool compare(const pair<int, int> &a, const pair<int, int> &b){
+        if(a.second == b.second){
+            return a.first < b.first;
+        }
+        else return a.second < b.second;
+    }
 
-	sort(v.begin(), v.end(), [](const auto& a, const auto& b) {
-		if (a.second != b.second) return a.second < b.second;
-		else return a.first < b.first;
-	});
+int main(){
+    cin >> n;
 
-	int cs = v[0].first;
-	int ce = v[0].second;
-	int s, e;
-	for (int i = 1; i < n; i++) {
-		s = v[i].first;
-		e = v[i].second;
-		if (s >= ce) {
-			ans++;
-			cs = s;
-			ce = e;
-		}
-	}
-	
-	cout << ans;
+    v.resize(n);
+    for(int i =0; i<n; i++){
+        cin>> v[i].first >> v[i].second;
+    }
+
+    sort(v.begin(), v.end(), compare);
+
+    int cnt = 0;
+    int end_time = 0;
+
+    for(int i =0; i<n; i++){
+        if(v[i].first >= end_time){
+            cnt++;
+            end_time = v[i].second;
+        }
+    }
+
+    cout << cnt;
 }
