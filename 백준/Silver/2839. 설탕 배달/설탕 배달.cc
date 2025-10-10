@@ -1,20 +1,24 @@
+//16:32
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int N;
-int ans;
+int n, ans;
 
-int main() {
-	int N;
-	cin >> N;
-
-	int f = N / 5;
-	while (f>=0) {
-		if ((N - (f * 5)) % 3 == 0) {
-			cout << f + (N - (f * 5)) / 3 << endl;
-			break;
-		}
-		f--;
-	}
-	if (f == -1) cout << -1 << endl;
+int main(){
+    cin >> n;
+    ans = 0;
+    bool done = false;
+    while(n>=0){
+        if(n%5 == 0){
+            ans += n/5;
+            done = true;
+            break;
+        }
+        n-=3;
+        ans += 1;
+    }
+    if(done) cout << ans;
+    else cout << -1;
+    
 }
