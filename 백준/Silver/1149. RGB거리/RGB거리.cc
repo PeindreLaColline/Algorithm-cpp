@@ -1,30 +1,34 @@
+//8:37
 #include <iostream>
 #include <vector>
+#include <math.h>
 using namespace std;
 
-#define R 0
-#define G 1
-#define B 2
+int n;
+vector<vector<int> > color;
+vector<vector<int> > dp;
 
-int main() {
-    int n;
+int main(){
     cin >> n;
-    vector<vector<int>> color(n, vector<int>(3));
-    vector<vector<int>> dp(n, vector<int>(3));
+    color.resize(n, vector<int>(3));
+    dp.resize(n, vector<int>(3));
 
-    for (int i = 0; i < n; i++) {
-        cin >> color[i][R] >> color[i][G] >> color[i][B];
+    for(int i =0; i<n; i++){
+        for(int j = 0; j<3; j++){
+            cin >> color[i][j];
+        }
     }
 
-    dp[0][R] = color[0][R];
-    dp[0][G] = color[0][G];
-    dp[0][B] = color[0][B];
+    dp[0][0] = color[0][0];
+    dp[0][1] = color[0][1];
+    dp[0][2] = color[0][2];
 
-    for (int i = 1; i < n; i++) {
-        dp[i][R] = color[i][R] + min(dp[i - 1][G], dp[i - 1][B]);
-        dp[i][G] = color[i][G] + min(dp[i - 1][R], dp[i - 1][B]);
-        dp[i][B] = color[i][B] + min(dp[i - 1][R], dp[i - 1][G]);
+    for(int i =1; i<n; i++){
+        dp[i][0] = color[i][0] + min(dp[i-1][1], dp[i-1][2]);
+        dp[i][1] = color[i][1] + min(dp[i-1][0], dp[i-1][2]);
+        dp[i][2] = color[i][2] + min(dp[i-1][0], dp[i-1][1]);
     }
 
-    cout << min(dp[n - 1][R], min(dp[n - 1][G], dp[n - 1][B])) << endl;
+    cout << min(dp[n-1][0], min(dp[n-1][1], dp[n-1][2]));
+
 }
