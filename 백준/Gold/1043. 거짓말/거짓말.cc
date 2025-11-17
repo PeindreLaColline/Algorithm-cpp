@@ -1,53 +1,49 @@
+//15:23
 #include <iostream>
 #include <vector>
-#include <map>
 #include <unordered_set>
 using namespace std;
 
 int n, m;
-int cnt_truth;
-unordered_set<int> truth;
+int truth_num;
 vector<vector<int> > party;
-int main(){
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-    
-    cin >> n >> m;
+unordered_set<int> truth;
 
-    cin >> cnt_truth;
+int main(){
+    cin >> n >> m;
+    cin >> truth_num;
+    party.resize(m, vector<int>());
+    
     int tmp;
-    for(int i =0; i<cnt_truth; i++){
+    for(int i =0; i<truth_num; i++){
         cin >> tmp;
         truth.insert(tmp);
     }
 
-    party.resize(m);
     for(int i =0; i<m; i++){
         cin >> tmp;
-        int idx;
-        for(int j =0; j<tmp; j++){
-            cin >> idx;
-            party[i].push_back(idx);
+        party[i].resize(tmp);
+        for(int j = 0; j<tmp; j++){
+            cin >> party[i][j];
         }
     }
 
-    int size = -1;
-    bool done;
+    int size=-1;
     while(true){
         if(size == truth.size()) break;
         size = truth.size();
-        
-        for(int i = 0; i<m; i++){
-            done = false;
+
+        for(int i =0; i<m; i++){
+            bool change = false;
             for(int j =0; j<party[i].size(); j++){
                 if(truth.find(party[i][j]) != truth.end()){
-                    done = true;
+                    change = true;
                     break;
                 }
             }
-            if(done){
-                for(int j = 0; j< party[i].size(); j++){
+
+            if(change){
+                for(int j = 0; j<party[i].size(); j++){
                     truth.insert(party[i][j]);
                 }
             }
@@ -60,5 +56,4 @@ int main(){
     }
 
     cout << ans;
-
 }
